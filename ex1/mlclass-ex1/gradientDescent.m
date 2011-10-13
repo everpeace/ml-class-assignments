@@ -21,16 +21,24 @@ for iter = 1:num_iters
     theta_prev = theta;
 
     % number of features.
-    p = length(X(1, :));
+    p = size(X, 2);
 
     % simultaneous update theta using theta_prev.
     for j = 1:p
+
+        % % calculate dJ/d(theta_j)
+        % % initial version
+        % deriv = 0;
+        % for i = 1:m
+          % deriv = deriv + (theta_prev'*X(i, :)'-y(i))*X(i, j);
+        % end
+        % deriv = deriv/m;
+
         % calculate dJ/d(theta_j)
-        deriv = 0;
-        for i = 1:m
-          deriv = deriv + (theta_prev'*X(i, :)'-y(i))*X(i, j);
-        end
-        deriv = deriv/m;
+        % vectorized version
+        % (exactly the same with multivariate version)
+        deriv = ((X*theta_prev - y)'*X(:, j))/m;
+
         % update theta_j
         theta(j) = theta_prev(j)-(alpha*deriv);
     end

@@ -12,12 +12,18 @@ J = 0;
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
-for i=1:m
-  dif = (theta'*X(i, :)'-y(i));
-  J = J + dif*dif;
-endfor
-%
-J = J / (2*m);
+
+% initial version.
+% for i=1:m
+  % dif = (theta'*X(i, :)'-y(i));
+  % J = J + dif*dif;
+% endfor
+% J = J / (2*m);
+
+% vectorized version.
+% (exactly the same with multivariate version. )
+dif = X*theta -y;
+J = (dif'*dif)/(2*m);
 %
 % =========================================================================
 
