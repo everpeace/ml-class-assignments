@@ -25,9 +25,7 @@ h = sigmoid(X*theta);
 J = ((-y)'*log(h)-(1-y)'*log(1-h))/m;
 
 % calculate grads
-for j = 1:size(theta)
-  grad(j) = ((h - y)'*X(:, j))/m;
-end
+grad = (X'*(h - y))/m;
 
 % =============================================================
 
