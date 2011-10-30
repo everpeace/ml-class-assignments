@@ -1,13 +1,13 @@
 function p = predictOneVsAll(all_theta, X)
-%PREDICT Predict whether the label is 0 or 1 using learned logistic 
+%PREDICT Predict whether the label is 0 or 1 using learned logistic
 %regression parameters all_theta
-%   p = PREDICT(all_theta, X) computes the predictions for X using a 
+%   p = PREDICT(all_theta, X) computes the predictions for X using a
 %   threshold at 0.5 (i.e., if sigmoid(all_theta'*x) >= 0.5, predict 1)
 
 m = size(X, 1);
-num_labels = size(all_theta, 2);
+num_labels = size(all_theta, 1);
 
-% You need to return the following variables correctly 
+% You need to return the following variables correctly
 p = zeros(size(X, 1), 1);
 
 % Add ones to the X data matrix
@@ -20,17 +20,15 @@ X = [ones(m, 1) X];
 %               num_labels).
 %
 % Hint: This code can be done all vectorized using the max function.
-%       In particular, the max function can also return the index of the 
-%       max element, for more information see 'help max'. If your examples 
-%       are in rows, then, you can use max(A, [], 2) to obtain the max 
+%       In particular, the max function can also return the index of the
+%       max element, for more information see 'help max'. If your examples
+%       are in rows, then, you can use max(A, [], 2) to obtain the max
 %       for each row.
-%       
+%
 
-
-
-
-
-
+ps = sigmoid(X*all_theta');
+[p_max, i_max]=max(ps, [], 2);
+p = i_max;
 
 % =========================================================================
 
