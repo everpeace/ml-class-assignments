@@ -17,7 +17,7 @@ All Solutions licensed under MIT License. See LICENSE.txt for further details.
 
 ## Copyright
 
-Copyright (c) 2011 [everpeace](http://twitter.com/schneems).
+Copyright (c) 2011 [everpeace](http://twitter.com/everpeace).
 
 
 ## Other Notable Open Source ml-class Sources
