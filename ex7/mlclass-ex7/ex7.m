@@ -22,9 +22,9 @@
 clear ; close all; clc
 
 %% ================= Part 1: Find Closest Centroids ====================
-%  To help you implement K-Means, we have divided the learning algorithm 
+%  To help you implement K-Means, we have divided the learning algorithm
 %  into two functions -- findClosestCentroids and computeCentroids. In this
-%  part, you shoudl complete the code in the findClosestCentroids function. 
+%  part, you shoudl complete the code in the findClosestCentroids function.
 %
 fprintf('Finding closest centroids.\n\n');
 
@@ -70,7 +70,7 @@ pause;
 %  After you have completed the two functions computeCentroids and
 %  findClosestCentroids, you have all the necessary pieces to run the
 %  kMeans algorithm. In this part, you will run the K-Means algorithm on
-%  the example dataset we have provided. 
+%  the example dataset we have provided.
 %
 fprintf('\nRunning K-Means clustering on example dataset.\n\n');
 
@@ -99,14 +99,18 @@ pause;
 %  In this exercise, you will use K-Means to compress an image. To do this,
 %  you will first run K-Means on the colors of the pixels in the image and
 %  then you will map each pixel on to it's closest centroid.
-%  
+%
 %  You should now complete the code in kMeansInitCentroids.m
 %
 
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 
 %  Load an image of a bird
-A = double(imread('bird_small.png'));
+% A = double(imread('bird_small.png'));
+
+% If imread does not work for you, you can try instead
+load ('bird_small.mat');
+
 A = A / 255; % Divide by 255 so that all values are in the range 0 - 1
 
 % Size of the image
@@ -119,11 +123,11 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 
 % Run your K-Means algorithm on this data
 % You should try different values of K and max_iters here
-K = 16; 
+K = 16;
 max_iters = 10;
 
 % When using K-Means, it is important the initialize the centroids
-% randomly. 
+% randomly.
 % You should complete the code in kMeansInitCentroids.m before proceeding
 initial_centroids = kMeansInitCentroids(X, K);
 
@@ -137,7 +141,7 @@ pause;
 %% ================= Part 5: Image Compression ======================
 %  In this part of the exercise, you will use the clusters of K-Means to
 %  compress an image. To do this, we first find the closest clusters for
-%  each example. After that, we 
+%  each example. After that, we
 
 fprintf('\nApplying K-Means to compress an image.\n\n');
 
@@ -145,7 +149,7 @@ fprintf('\nApplying K-Means to compress an image.\n\n');
 idx = findClosestCentroids(X, centroids);
 
 % Essentially, now we have represented the image X as in terms of the
-% indices in idx. 
+% indices in idx.
 
 % We can now recover the image from the indices (idx) by mapping each pixel
 % (specified by it's index in idx) to the centroid value
@@ -154,9 +158,9 @@ X_recovered = centroids(idx,:);
 % Reshape the recovered image into proper dimensions
 X_recovered = reshape(X_recovered, img_size(1), img_size(2), 3);
 
-% Display the original image 
+% Display the original image
 subplot(1, 2, 1);
-imagesc(A); 
+imagesc(A);
 title('Original');
 
 % Display compressed image side by side
