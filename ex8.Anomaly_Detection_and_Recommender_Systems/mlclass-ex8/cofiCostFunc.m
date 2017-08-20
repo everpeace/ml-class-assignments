@@ -46,23 +46,12 @@ J = sum((diff.^2)(R==1))/2;
 J = J + lambda*sum(sum(Theta.^2))/2;  % regularized term of theta.
 J = J + lambda*sum(sum(X.^2))/2;     % regularized term of x.
 
-% calculating gradient of x.
-for i=1:num_movies
-  idx = find(R(i, :)==1);    % users that have rated movie i.
-  Theta_tmp = Theta(idx, :); % user features of movie i.
-  Y_tmp = Y(i, idx);         % user's ratings of movie i.
-  X_grad(i, :) = (X(i, :)*Theta_tmp' - Y_tmp)*Theta_tmp;
-  X_grad(i, :) = X_grad(i, :)+lambda*X(i, :); % regularized term of x.
-end
+X_grad = (diff.*R)*Theta;                 %unregularized vectorized implementation
+Theta_grad = ((diff.*R)'*X);              %unregularized vectorized implementation
 
-% calculating gradient of theta.
-for j=1:num_users
-  idx = find(R(:, j)==1)'; % movies that have rated by user j.
-  X_tmp = X(idx, :);       % features of movies rated by user j.
-  Y_tmp = Y(idx, j);       % user ratings by user j.
-  Theta_grad(j, :) = (X_tmp*Theta(j, :)'-Y_tmp)'*X_tmp;
-  Theta_grad(j, :) = Theta_grad(j, :)+lambda*Theta(j, :); % regularized term of theta.
-end
+
+X_grad = X_grad + (lambda * X);             % regularized
+Theta_grad = Theta_grad + (lambda * Theta);  % regularized
 
 % =============================================================
 
