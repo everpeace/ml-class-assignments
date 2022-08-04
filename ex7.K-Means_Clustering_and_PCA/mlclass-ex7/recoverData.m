@@ -22,9 +22,7 @@ X_rec = zeros(size(Z, 1), size(U, 1));
 %
 
 U_reduce = U(:, 1:K);
-for i = 1:size(Z, 1)
-  X_rec(i, :) = (U_reduce*Z(i, :)')';
-end
+X_rec = (U_reduce*Z')';
 
 % =============================================================
 
